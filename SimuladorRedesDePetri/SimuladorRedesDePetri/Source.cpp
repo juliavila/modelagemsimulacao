@@ -17,7 +17,7 @@ int main()
 
 	int nroLugares;
 	int nroTransicoes;
-	int nroArcos;
+	//int nroArcos;
 
 	string strLugar = "o Lugar";
 	string strTran = "a Transicao";
@@ -45,37 +45,9 @@ int main()
 	cout << endl << "Informe o numero de Transicoes: ";
 	cin >> nroTransicoes;
 
-	cout << endl << "Informe o numero de Arcos: ";
-	cin >> nroArcos;
-
-	//arcos = vector<Arco>(nroArcos);
-
-	for (int i = 0; i < nroArcos; i++)
+	for (int i = 0; i < nroTransicoes; i++)
 	{
-		int tipoOrigemArco = 0;
-		int pesoArco = 0;
-		int lugarOrigem;
-		int lugarDestino;
-
-		Arco *arco = new Arco();
-		arcos.push_back(*arco);
-
-		cout << endl << "A origem deste arco eh um Lugar (digite 0) ou uma Transicao (digite 1)?";
-		cin >> tipoOrigemArco;
-
-		cout << endl << "Informe " << (!tipoOrigemArco ? strLugar : strTran) << " de Origem:";
-		cin >> lugarOrigem;
-		cout << endl << "Informe " << (tipoOrigemArco ? strLugar : strTran) << " de Destino:";
-		cin >> lugarDestino;
-
-		cout << endl << "Informe o peso do Arco: ";
-		cin >> pesoArco;
-
-		arcos[i].setTipoOrigem(tipoOrigemArco);
-		arcos[i].setOrigem(lugarOrigem);
-		arcos[i].setDestino(lugarDestino);
-		arcos[i].setPeso(pesoArco);
-
+		//alimentar as transicoes aqui
 	}
 
 	/**
@@ -91,12 +63,13 @@ int main()
 	/************************************/
 	cout << endl << "TRANSICOES:" << endl;
 	cout << "total: " << nroTransicoes << endl;
+	//complementar teste de transicoes
 	/************************************/
 	cout << endl << "ARCOS:" << endl;
 	cout << "total; " << arcos.size();
 	for (int i = 0; i < arcos.size(); i++)
 	{
-		cout << i << " - tipo origem: " << arcos[i].getOrigem() << "; origem: " << arcos[i].getOrigem() << "; destino: " << arcos[i].getDestino() << "; peso: " << arcos[i].getPeso() << endl;
+		cout << i << " - peso: " << arcos[i].getPeso() << endl;
 	}
 	/************************************/
 	system("pause");
