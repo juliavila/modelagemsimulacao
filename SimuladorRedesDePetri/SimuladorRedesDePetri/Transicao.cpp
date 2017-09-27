@@ -11,42 +11,42 @@ Transicao::~Transicao()
 {
 }
 
-vector<Arco> Transicao::getArcosOrigem()
+vector<Arco*> Transicao::getArcosOrigem()
 {
 	return this->arcosOrigem;
 }
 
-void Transicao::setArcoOrigem(Arco arco)
+void Transicao::setArcoOrigem(Arco* arco)
 {
 	this->arcosOrigem.push_back(arco);
 }
 
-vector<Lugar> Transicao::getLugaresOrigem()
+vector<Lugar*> Transicao::getLugaresOrigem()
 {
 	return this->lugaresOrigem;
 }
 
-void Transicao::setLugarOrigem(Lugar lugar)
+void Transicao::setLugarOrigem(Lugar *lugar)
 {
 	this->lugaresOrigem.push_back(lugar);
 }
 
-vector<Arco> Transicao::getArcosDestino()
+vector<Arco*> Transicao::getArcosDestino()
 {
 	return this->arcosDestino;
 }
 
-void Transicao::setArcoDestino(Arco arco)
+void Transicao::setArcoDestino(Arco *arco)
 {
 	this->arcosDestino.push_back(arco);
 }
 
-vector<Lugar> Transicao::getLugaresDestino()
+vector<Lugar*> Transicao::getLugaresDestino()
 {
 	return this->lugaresDestino;
 }
 
-void Transicao::setLugarDestino(Lugar lugar)
+void Transicao::setLugarDestino(Lugar *lugar)
 {
 	this->lugaresDestino.push_back(lugar);
 }
@@ -58,13 +58,13 @@ void Transicao::executar()
 		//consome marcas
 		for (int i = 0; i < this->arcosOrigem.size(); i++)
 		{
-			this->lugaresOrigem[i].removeMarcas(this->arcosOrigem[i].getPeso());
+			this->lugaresOrigem[i]->removeMarcas(this->arcosOrigem[i]->getPeso());
 		}
 
 		//gera marcas
 		for (int i = 0; i < this->arcosDestino.size(); i++)
 		{
-			this->lugaresDestino[i].addMarcas(this->arcosDestino[i].getPeso());
+			this->lugaresDestino[i]->addMarcas(this->arcosDestino[i]->getPeso());
 		}
 
 		this->habilitado = false;
@@ -79,7 +79,7 @@ void Transicao::tentarHabilitar()
 	bool habilitar = true;
 	for (int i = 0; i < this->arcosOrigem.size(); i++)
 	{
-		if (this->arcosOrigem[i].getPeso() > this->lugaresOrigem[i].getMarcas())
+		if (this->arcosOrigem[i]->getPeso() > this->lugaresOrigem[i]->getMarcas())
 		{
 			habilitar = false;
 			break;

@@ -6,11 +6,11 @@
 class Transicao
 {
 private:
-	vector<Arco> arcosOrigem;
-	vector<Lugar> lugaresOrigem;
+	vector<Arco*> arcosOrigem;
+	vector<Lugar*> lugaresOrigem;
 
-	vector<Arco> arcosDestino;
-	vector<Lugar> lugaresDestino;
+	vector<Arco*> arcosDestino;
+	vector<Lugar*> lugaresDestino;
 
 	bool habilitado;
 
@@ -21,14 +21,14 @@ public:
 	Transicao();
 	~Transicao();
 
-	vector<Arco> getArcosOrigem();
-	void setArcoOrigem(Arco);
-	vector<Lugar> getLugaresOrigem();
-	void setLugarOrigem(Lugar);
-	vector<Arco> getArcosDestino();
-	void setArcoDestino(Arco);
-	vector<Lugar> getLugaresDestino();
-	void setLugarDestino(Lugar);
+	vector<Arco*> getArcosOrigem();
+	void setArcoOrigem(Arco*);
+	vector<Lugar*> getLugaresOrigem();
+	void setLugarOrigem(Lugar*);
+	vector<Arco*> getArcosDestino();
+	void setArcoDestino(Arco*);
+	vector<Lugar*> getLugaresDestino();
+	void setLugarDestino(Lugar*);
 
 	void executar();
 };
