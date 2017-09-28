@@ -65,7 +65,7 @@ void init(vector<Transicao> t, vector<Lugar> l, vector<Arco> a)
 		//---------------------------------------------- LUGARES DE ORIGEM --------------------------------------------
 
 		string lugaresOrigem;
-		cout << "Para a transicao " << i << " informe:\n\t os lugares de origem(separados por , se houver mais de um): ";
+		cout << "Para a transicao " << i << " informe:\n\t os lugares de origem(separados por ',' se houver mais de um): ";
 		cin >> lugaresOrigem;
 		string aux; // string usada para quebrar os lugares
 
@@ -88,10 +88,29 @@ void init(vector<Transicao> t, vector<Lugar> l, vector<Arco> a)
 
 		//---------------------------------------------- ARCOS DE ORIGEM --------------------------------------------
 
+		for (int x = 0; x > transicao->getLugaresOrigem().size(); x++) // pede o peso do arco para cada lugar de origem para cada lugar de origem
+		{
+			Arco *arco = new Arco();
+			int pesoArco = 1;
+
+			cout << "/t qual o peso do arco que vem do lugar de origem " << x << "?/n";
+			cin >> pesoArco;
+			if (pesoArco < 1)
+			{
+				pesoArco = 1;
+			}
+
+			arco->setPeso(pesoArco);
+
+			a.push_back(*arco); // adiciona o arco no vector de arcos
+
+			transicao->setArcoOrigem(&a.back()); // adiciona o ultimo arco (que vai ser o mais novo) como arco de origem
+		}
+
 		//---------------------------------------------- LUGARES DE DESTINO --------------------------------------------
 
 		string lugaresDestino;
-		cout << "\t os lugares de destino(separados por , se houver mais de um): ";
+		cout << "\t os lugares de destino(separados por ',' se houver mais de um): ";
 		cin >> lugaresDestino;
 
 		while (lugaresDestino.size() > 0)
@@ -113,7 +132,26 @@ void init(vector<Transicao> t, vector<Lugar> l, vector<Arco> a)
 
 		//---------------------------------------------- ARCOS DE DESTINO --------------------------------------------
 
-		//alimentar as transicoes aqui
+		for (int x = 0; x > transicao->getLugaresOrigem().size(); x++) // pede o peso do arco para cada lugar de origem para cada lugar de origem
+		{
+			Arco *arco = new Arco();
+			int pesoArco = 1;
+
+			cout << "/t qual o peso do arco que vem do lugar de origem " << x << "?/n";
+			cin >> pesoArco;
+			if (pesoArco < 1)
+			{
+				pesoArco = 1;
+			}
+
+			arco->setPeso(pesoArco);
+
+			a.push_back(*arco); // adiciona o arco no vector de arcos
+
+			transicao->setArcoOrigem(&a.back()); // adiciona o ultimo arco (que vai ser o mais novo) como arco de origem
+		}
+
+		t.push_back(*transicao);
 	}
 }
 
@@ -155,7 +193,98 @@ int main()
 
 	for (int i = 0; i < nroTransicoes; i++)
 	{
-		//alimentar as transicoes aqui
+		Transicao *transicao = new Transicao();
+
+		//---------------------------------------------- LUGARES DE ORIGEM --------------------------------------------
+
+		string lugaresOrigem;
+		cout << "\n Para a transicao " << i << " informe:\n\t os lugares de origem(separados por ',' se houver mais de um): ";
+		cin >> lugaresOrigem;
+		string aux; // string usada para quebrar os lugares
+
+		while (lugaresOrigem.size() > 0)
+		{
+			int virgulaPos = lugaresOrigem.find(","); // acha a posicao de uma vergula se houver, se nao houver virgula, o valor retornado sera igual a string::npos
+
+			if (virgulaPos == string::npos) // nao ha virgula
+			{
+				virgulaPos = lugaresOrigem.size(); // se nao houver virgula, faz o seguinte em a string inteira
+			}
+
+			aux = lugaresOrigem.substr(0, virgulaPos); // copia o que vem antes da virgula em uma string diferente
+			lugaresOrigem.replace(0, virgulaPos + 1, ""); // apaga o que foi copiado
+
+			int posLugar = stringToInt(aux); // converte string para int
+
+			transicao->setLugarOrigem(&lugares[posLugar]); // finalmente seta um lugar de origem
+		}
+
+		//---------------------------------------------- ARCOS DE ORIGEM --------------------------------------------
+
+		for (int x = 0; x < transicao->getLugaresOrigem().size(); x++) // pede o peso do arco para cada lugar de origem para cada lugar de origem
+		{
+			Arco *arco = new Arco();
+			int pesoArco = 1;
+
+			cout << "\t qual o peso do arco que vem do " << x+1 << " lugar de origem?";
+			cin >> pesoArco;
+			if (pesoArco < 1)
+			{
+				pesoArco = 1;
+			}
+
+			arco->setPeso(pesoArco);
+
+			arcos.push_back(*arco); // adiciona o arco no vector de arcos
+
+			transicao->setArcoOrigem(&arcos.back()); // adiciona o ultimo arco (que vai ser o mais novo) como arco de origem
+		}
+
+		//---------------------------------------------- LUGARES DE DESTINO --------------------------------------------
+
+		string lugaresDestino;
+		cout << "\t os lugares de destino(separados por ',' se houver mais de um): ";
+		cin >> lugaresDestino;
+
+		while (lugaresDestino.size() > 0)
+		{
+			int virgulaPos = lugaresDestino.find(","); // acha a posicao de uma vergula se houver, se nao houver virgula, o valor retornado sera igual a string::npos
+
+			if (virgulaPos == string::npos) // nao ha virgula
+			{
+				virgulaPos = lugaresDestino.size(); // se nao houver virgula, faz o seguinte em a string inteira
+			}
+
+			aux = lugaresDestino.substr(0, virgulaPos); // copia o que vem antes da virgula em uma string diferente
+			lugaresDestino.replace(0, virgulaPos + 1, ""); // apaga o que foi copiado
+
+			int posLugar = stringToInt(aux); // converte string para int
+
+			transicao->setLugarDestino(&lugares[posLugar]); // finalmente seta um lugar de origem
+		}
+
+		//---------------------------------------------- ARCOS DE DESTINO --------------------------------------------
+
+		for (int x = 0; x < transicao->getLugaresOrigem().size(); x++) // pede o peso do arco para cada lugar de origem para cada lugar de origem
+		{
+			Arco *arco = new Arco();
+			int pesoArco = 1;
+
+			cout << "\t qual o peso do arco que vem do " << x+1 << "° lugar de destino?";
+			cin >> pesoArco;
+			if (pesoArco < 1)
+			{
+				pesoArco = 1;
+			}
+
+			arco->setPeso(pesoArco);
+
+			arcos.push_back(*arco); // adiciona o arco no vector de arcos
+
+			transicao->setArcoOrigem(&arcos.back()); // adiciona o ultimo arco (que vai ser o mais novo) como arco de origem
+		}
+
+		transicoes.push_back(*transicao);
 	}
 
 	/**
@@ -174,13 +303,13 @@ int main()
 	//complementar teste de transicoes
 	/************************************/
 	cout << endl << "ARCOS:" << endl;
-	cout << "total; " << arcos.size();
+	cout << "total; " << arcos.size() << endl;
 	for (int i = 0; i < arcos.size(); i++)
 	{
 		cout << i << " - peso: " << arcos[i].getPeso() << endl;
 	}
 	/************************************/
-	//system("pause");
+	system("pause");
 	return 0;
 }
 
