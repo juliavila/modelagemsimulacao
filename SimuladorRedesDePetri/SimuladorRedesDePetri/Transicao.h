@@ -29,6 +29,7 @@ public:
 	void setArcoDestino(Arco*);
 	vector<Lugar*> getLugaresDestino();
 	void setLugarDestino(Lugar*);
+	bool getHabilitado();
 
 	void executar();
 };

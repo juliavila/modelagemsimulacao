@@ -89,3 +89,8 @@ void Transicao::tentarHabilitar()
 	if (habilitar)
 		this->habilitado = true;
 }
+
+bool Transicao::getHabilitado()
+{
+	return habilitado;
+}
